@@ -1,6 +1,6 @@
-name: 'Users list'
+name: 'Users List'
 type: module
-description: 'Módulo de listar ítems'
+description: 'Módulo para listar usuarios con búsqueda y AJAX'
 package: Custom
 core_version_requirement: ^10
 dependencies: []
