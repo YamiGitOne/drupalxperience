@@ -8,12 +8,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SearchFormController extends ControllerBase {
 
-    /**
-     * Muestra la página con el formulario de búsqueda.
-     */
     public function searchPage() {
         return [
-            '#theme' => 'users_list_search', // ← Nombre del template Twig
+            '#theme' => 'users_list_search', 
             '#attached' => [
                 'library' => ['users_list/ajax'],
             ],
@@ -38,7 +35,6 @@ class SearchFormController extends ControllerBase {
         }';
         $usuarios = json_decode($usuarios_json, true)['usuarios'];
 
-        // Filtrar usuarios según los datos del formulario
         if (!empty($data['name'])) {
             $usuarios = array_filter($usuarios, function($user) use ($data) {
                 return stripos($user['name'], $data['name']) !== false;
