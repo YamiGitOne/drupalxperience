@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Código de lógica para el módulo users_list.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+function users_list_preprocess_page(&$variables) {
+  if (\Drupal::routeMatch()->getRouteName() == 'users_list.search_page') {
+    $variables['#title'] = 'Búsqueda personalizada de usuarios';
+  }
+}
+
+

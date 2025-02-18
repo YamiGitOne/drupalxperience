@@ -1,5 +1,5 @@
 users_list.search_page:
-  path: '/admin/users-list/search'
+  path: '/custom/users-list/search'
   defaults:
     _controller: '\Drupal\users_list\Controller\SearchFormController::searchPage'
     _title: 'Buscar Usuarios'
@@ -7,7 +7,7 @@ users_list.search_page:
     _permission: 'access content'
 
 users_list.search_ajax:
-  path: '/admin/users-list/search/ajax'
+  path: '/custom/users-list/search/ajax'
   defaults:
     _controller: '\Drupal\users_list\Controller\SearchFormController::searchUsers'
   methods: ['POST']
