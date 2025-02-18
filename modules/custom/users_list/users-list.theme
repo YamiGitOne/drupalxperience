@@ -2,7 +2,7 @@
 
 function users_list_theme($existing, $type, $theme, $path) {
     return [
-        'userslist' => [
+        'users_list' => [
             'variables' => [
                 'usuarios' => [],
             ],

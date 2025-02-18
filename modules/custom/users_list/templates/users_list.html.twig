@@ -1,20 +1,28 @@
-{{ attach_library('users_list/ajax') }}
-
-<div id="users-list">
-    <h2>Desde Twig</h2>
-    <form id="users-search-form">
-        <input type="text" id="search-name" placeholder="Nombre">
-        <input type="text" id="search-email" placeholder="Correo">
-        <button type="submit">Buscar</button>
-    </form>
-
-    <div id="users-container">
-        <p>Cargando usuarios...</p>
-    </div>
-
-    <div id="pagination">
-        <button id="prev-page">Anterior</button>
-        <span id="page-info">Página 1</span>
-        <button id="next-page">Siguiente</button>
-    </div>
+<div class="users-list">
+    <h2>Lista de Usuarios</h2>
+    
+    {% if usuarios is empty %}
+        <p>No hay usuarios disponibles.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido 1</th>
+                    <th>Apellido 2</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.name }}</td>
+                        <td>{{ usuario.surname1 }}</td>
+                        <td>{{ usuario.surname2 }}</td>
+                        <td>{{ usuario.email }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 </div>
