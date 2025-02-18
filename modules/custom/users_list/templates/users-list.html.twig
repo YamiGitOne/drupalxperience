@@ -1,12 +1,14 @@
+{{ attach_library('users_list/ajax') }}
+
 <div id="users-list">
     <h2>Desde Twig</h2>
-    <form id="user-search-form">
+    <form id="users-search-form">
         <input type="text" id="search-name" placeholder="Nombre">
         <input type="text" id="search-email" placeholder="Correo">
         <button type="submit">Buscar</button>
     </form>
 
-    <div id="userS-container">
+    <div id="users-container">
         <p>Cargando usuarios...</p>
     </div>
 
