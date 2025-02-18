@@ -10,12 +10,12 @@ class UsersListController extends ControllerBase {
 
     public function listPage() {
         return [
-            '#theme' => 'userslist',
+            '#theme' => 'users_list',
             '#usuarios' => [
                 ["name" => "Ejemplo", "surname1" => "Uno", "surname2" => "Dos", "email" => "ejemplo@yopmail.com"]
             ],
             '#attached' => [
-                'library' => ['users_list/ajax'],
+                'library' => ['users-list/ajax'],
             ],
         ];
     }
