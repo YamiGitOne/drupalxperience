@@ -1,15 +1,15 @@
-users_list.page:
-  path: '/admin/users-list'
+users_list.search_page:
+  path: '/admin/users-list/search'
   defaults:
-    _controller: '\Drupal\users_list\Controller\UsersListController::listPage'
-    _title: 'Listado de Usuarios'
+    _controller: '\Drupal\users_list\Controller\SearchFormController::searchPage'
+    _title: 'Buscar Usuarios'
   requirements:
     _permission: 'access content'
 
-users_list.ajax:
-  path: '/admin/users-list/ajax'
+users_list.search_ajax:
+  path: '/admin/users-list/search/ajax'
   defaults:
-    _controller: '\Drupal\users_list\Controller\UsersListController::ajaxList'
+    _controller: '\Drupal\users_list\Controller\SearchFormController::searchUsers'
   methods: ['POST']
   requirements:
     _permission: 'access content'

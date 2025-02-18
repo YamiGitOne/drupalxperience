@@ -2,10 +2,9 @@
 
 function users_list_theme($existing, $type, $theme, $path) {
     return [
-        'users_list' => [
-            'variables' => [
-                'usuarios' => [],
-            ],
+        'users_list_search' => [ // ← Coincide con `#theme => 'users_list_search'`
+            'variables' => [],
         ],
     ];
 }
+
