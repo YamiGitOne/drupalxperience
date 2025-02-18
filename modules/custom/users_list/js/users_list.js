@@ -10,7 +10,7 @@
                 const email = $('#search-email').val();
 
                 try {
-                    let response = await fetch("/admin/users-list/search/ajax", {
+                    let response = await fetch("/custom/users-list/search/ajax", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
