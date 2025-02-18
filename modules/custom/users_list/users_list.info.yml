@@ -2,5 +2,5 @@ name: 'Users List'
 type: module
 description: 'Módulo para listar usuarios con búsqueda y AJAX'
 package: Custom
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
 dependencies: []
