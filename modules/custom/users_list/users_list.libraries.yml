@@ -1,0 +1,8 @@
+ajax:
+  version: 1.x
+  js:
+    js/users_list.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupal.ajax

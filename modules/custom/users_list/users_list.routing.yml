@@ -1,0 +1,15 @@
+users_list.page:
+  path: '/admin/users-list'
+  defaults:
+    _controller: '\Drupal\users_list\Controller\UsersListController::listPage'
+    _title: 'Listado de Usuarios'
+  requirements:
+    _permission: 'access content'
+
+users_list.ajax:
+  path: '/admin/users-list/ajax'
+  defaults:
+    _controller: '\Drupal\users_list\Controller\UsersListController::ajaxList'
+  methods: ['POST']
+  requirements:
+    _permission: 'access content'
