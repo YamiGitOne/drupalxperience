@@ -1,6 +1,6 @@
 <?php
 
-function users_list_theme($existing, $type, $theme, $path) {
+function users_list($existing, $type, $theme, $path) {
     return [
         'users_list' => [
             'variables' => [],

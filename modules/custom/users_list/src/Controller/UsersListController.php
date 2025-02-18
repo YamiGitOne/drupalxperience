@@ -10,7 +10,6 @@ class UsersListController extends ControllerBase {
 
     public function listPage() {
         return [
-            '#markup' => '<p>Probando si el controlador funciona.</p>',
             '#theme' => 'users_list',
             '#usuarios' => [],
             '#attached' => [
