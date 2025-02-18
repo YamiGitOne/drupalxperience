@@ -1,0 +1,6 @@
+name: 'Users list'
+type: module
+description: 'Módulo de listar ítems'
+package: Custom
+core_version_requirement: ^10
+dependencies: []
