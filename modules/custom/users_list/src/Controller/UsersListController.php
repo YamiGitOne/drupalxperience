@@ -3,8 +3,6 @@
 namespace Drupal\users_list\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 class UsersListController extends ControllerBase {
 
