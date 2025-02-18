@@ -8,13 +8,14 @@
 
             async function fetchUsers(page = 1) {
                 try {
-                    console.log("Fetching users...");
+                    console.log(`Fetching users for page ${page}...`);
 
                     let response = await fetch("/admin/users-list/ajax", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
-                        }
+                        },
+                        body: JSON.stringify({ page: page })
                     });
 
                     console.log("Response received:", response);
@@ -25,6 +26,11 @@
 
                     let data = await response.json();
                     console.log("✅ Data received:", data);
+
+                    if (!data.usuarios || data.usuarios.length === 0) {
+                        $('#users-container').html('<p>No hay usuarios disponibles.</p>');
+                        return;
+                    }
 
                     let start = (page - 1) * usersPerPage;
                     let end = start + usersPerPage;
@@ -46,21 +52,23 @@
                 }
             }
 
-            fetchUsers();
+            $(document).ready(function () {
+                fetchUsers();
 
-            $('#prev-page').click(function () {
-                if (currentPage > 1) {
-                    fetchUsers(currentPage - 1);
-                }
-            });
+                $('#prev-page').click(function () {
+                    if (currentPage > 1) {
+                        fetchUsers(currentPage - 1);
+                    }
+                });
 
-            $('#next-page').click(function () {
-                fetchUsers(currentPage + 1);
-            });
+                $('#next-page').click(function () {
+                    fetchUsers(currentPage + 1);
+                });
 
-            $('#users-search-form').submit(function (event) {
-                event.preventDefault();
-                fetchUsers(1);
+                $('#users-search-form').submit(function (event) {
+                    event.preventDefault();
+                    fetchUsers(1);
+                });
             });
         }
     };
