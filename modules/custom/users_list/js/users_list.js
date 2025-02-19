@@ -7,15 +7,17 @@
 
             function loadUsers(page = 1) {
                 const name = $('#search-name', context).val()?.trim() || "";
+                const surname1 = $('#search-surname1').val().trim();
+                const surname2 = $('#search-surname2').val().trim();
                 const email = $('#search-email', context).val()?.trim() || "";
 
-                console.log("Buscando usuarios con:", name, email, "Página:", page);
+                console.log("Buscando usuarios con:", name, surname1, surname2, email, "Página:", page);
 
                 $.ajax({
                     url: "/custom/users-list/search/ajax",
                     method: "POST",
                     contentType: "application/json",
-                    data: JSON.stringify({ name, email, page }),
+                    data: JSON.stringify({ name, surname1, surname2, email, page }),
                     success: function (response) {
                         console.log("Respuesta AJAX recibida:", response);
 
@@ -25,13 +27,17 @@
                             return;
                         }
 
-                        let userList = '<ul>';
+                        let userList = '<table border="1" style="width:100%; text-align:left;">';
+                        userList += '<tr><th>Nombre de Usuario</th><th>Apellido 1</th><th>Apellido 2</th><th>Correo Electrónico</th></tr>';
                         response.usuarios.forEach(user => {
-                            userList += `<li>${user.name} ${user.surname1} ${user.surname2} - ${user.email}</li>`;
+                            userList += `<tr>
+                                <td>${user.name}</td>
+                                <td>${user.surname1}</td>
+                                <td>${user.surname2}</td>
+                                <td>${user.email}</td>
+                            </tr>`;
                         });
-                        userList += '</ul>';
-
-                        $('#users-container', context).html(userList);
+                        userList += '</table>';
 
 
                         let pagination = '';
