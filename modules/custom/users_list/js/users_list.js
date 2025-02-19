@@ -3,7 +3,7 @@
 
     Drupal.behaviors.usersListSearch = {
         attach: function (context, settings) {
-            console.log("🚀 users_list.js cargado correctamente con Drupal y jQuery funcionando.");
+            console.log("users_list.js cargado correctamente con Drupal y jQuery funcionando.");
 
             function loadUsers(page = 1) {
                 const name = $('#search-name', context).val()?.trim() || "";
@@ -41,7 +41,7 @@
                         $('#pagination-container', context).html(pagination);
                     },
                     error: function (xhr) {
-                        console.error("❌ Error en la petición AJAX:", xhr);
+                        console.error("Error en la petición AJAX:", xhr);
                         $('#users-container', context).html('<p>Error al cargar los usuarios.</p>');
                     }
                 });
@@ -49,7 +49,7 @@
 
             $(once('users-list-search', '#users-search-form', context)).submit(function (event) {
                 event.preventDefault();
-                console.log("🚀 Evento submit ejecutado correctamente.");
+                console.log("Evento submit ejecutado correctamente.");
                 loadUsers();
                 return false;
             });
