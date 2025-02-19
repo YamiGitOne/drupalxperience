@@ -28,26 +28,38 @@ class SearchFormController extends ControllerBase {
     $page = isset($data['page']) ? (int)$data['page'] : 1;
     $perPage = 5;
 
-    \Drupal::logger('users_list')->notice('🔎 Buscando: name = @name, email = @email, page = @page', [
+    \Drupal::logger('users_list')->notice('Buscando: name = @name, surname1 = @surname1, surname2 = @surname2, email = @email, page = @page', [
       '@name' => $name,
+      '@surname1' => $surname1,
+      '@surname2' => $surname2,
       '@email' => $email,
       '@page' => $page
     ]);
 
-     // Simulación de usuarios
-     $all_users = [];
-     for ($i = 1; $i <= 50; $i++) {
-       $all_users[] = [
-         'id' => $i,
-         'name' => "Usuario $i",
-         'surname1' => "Apellido1_$i",
-         'surname2' => "Apellido2_$i",
-         'email' => "usuario$i@yopmail.com",
-       ];
-     }
+     // Listas de nombres y apellidos simulados
+    $names = ["Juan", "María", "Carlos", "Ana", "Luis", "Elena", "Pedro", "Lucía", "Miguel", "Sofía"];
+    $surnames = ["García", "Fernández", "Martínez", "López", "González", "Rodríguez", "Pérez", "Sánchez", "Ramírez", "Torres"];
+
+    // Simulación de usuarios
+    $all_users = [];
+    for ($i = 1; $i <= 50; $i++) {
+      $randomName = $names[array_rand($names)];
+      $randomSurname1 = $surnames[array_rand($surnames)];
+      $randomSurname2 = $surnames[array_rand($surnames)];
+
+      $all_users[] = [
+        'id' => $i,
+        'name' => $randomName,
+        'surname1' => $randomSurname1,
+        'surname2' => $randomSurname2,
+        'email' => strtolower($randomName) . strtolower($randomSurname1) . "@yopmail.com",
+      ];
+    }
 
      $filtered_users = array_filter($all_users, function ($user) use ($name, $email) {
         return (stripos($user['name'], $name) !== false || empty($name)) &&
+               (stripos($user['surname1'], $surname1) !== false || empty($surname1)) &&
+               (stripos($user['surname2'], $surname2) !== false || empty($surname2)) &&
                (stripos($user['email'], $email) !== false || empty($email));
       });
 
