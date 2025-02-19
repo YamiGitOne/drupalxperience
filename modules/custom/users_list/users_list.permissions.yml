@@ -1,0 +1,4 @@
+search users:
+  title: 'Buscar usuarios en la lista'
+  description: 'Permite a los usuarios buscar en la lista de usuarios'
+  restrict access: FALSE

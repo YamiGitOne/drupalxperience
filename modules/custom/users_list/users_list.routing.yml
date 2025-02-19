@@ -4,7 +4,7 @@ users_list.search_page:
     _controller: '\Drupal\users_list\Controller\SearchFormController::searchPage'
     _title: 'Buscar Usuarios'
   requirements:
-    _access: 'TRUE'
+    _permission: 'search users'
 
 users_list.search_ajax:
   path: '/custom/users-list/search/ajax'
@@ -12,4 +12,4 @@ users_list.search_ajax:
     _controller: '\Drupal\users_list\Controller\SearchFormController::searchUsers'
   methods: ['POST']
   requirements:
-    _access: 'TRUE'
+    _permission: 'search users'
