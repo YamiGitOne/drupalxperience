@@ -22,17 +22,37 @@ class SearchFormController extends ControllerBase {
 
   public function searchUsers(Request $request) {
     $data = json_decode($request->getContent(), true);
-    $search_term = $data['query'] ?? '';
+    $name = $data['name'] ?? '';
+    $email = $data['email'] ?? '';
+    $page = $data['page'] ?? 1;
+    $perPage = 5;
 
-    $users = [
-      ['id' => 1, 'name' => 'Juan Pérez', 'email' => 'juan@example.com'],
-      ['id' => 2, 'name' => 'María Gómez', 'email' => 'maria@example.com'],
-    ];
+     // Simulación de usuarios
+     $all_users = [];
+     for ($i = 1; $i <= 20; $i++) {
+       $all_users[] = [
+         'id' => $i,
+         'name' => "Usuario $i",
+         'surname1' => "Apellido1_$i",
+         'surname2' => "Apellido2_$i",
+         'email' => "usuario$i@yopmail.com",
+       ];
+     }
 
-    $results = array_filter($users, function ($user) use ($search_term) {
-      return stripos($user['name'], $search_term) !== false;
-    });
+     $filtered_users = array_filter($all_users, function ($user) use ($name, $email) {
+        return (stripos($user['name'], $name) !== false || empty($name)) &&
+               (stripos($user['email'], $email) !== false || empty($email));
+      });
 
-    return new JsonResponse(['usuarios' => array_values($results)]);
-  }
-}
+        $total_users = count($filtered_users);
+        $start = ($page - 1) * $perPage;
+        $users_paginated = array_slice($filtered_users, $start, $perPage);
+
+        return new JsonResponse([
+            'usuarios' => array_values($users_paginated),
+            'total' => $total_users,
+            'per_page' => $perPage,
+            'current_page' => $page,
+          ]);
+        }
+      }
