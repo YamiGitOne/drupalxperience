@@ -22,10 +22,16 @@ class SearchFormController extends ControllerBase {
 
   public function searchUsers(Request $request) {
     $data = json_decode($request->getContent(), true);
-    $name = trim($data['name'] ?? '');
-    $email = trim($data['email'] ?? '');
-    $page = $data['page'] ?? 1;
+    $name = isset($data['name']) ? trim($data['name']) : '';
+    $email = isset($data['email']) ? trim($data['email']) : '';
+    $page = isset($data['page']) ? (int)$data['page'] : 1;
     $perPage = 5;
+
+    \Drupal::logger('users_list')->notice('🔎 Buscando: name = @name, email = @email, page = @page', [
+      '@name' => $name,
+      '@email' => $email,
+      '@page' => $page
+    ]);
 
      // Simulación de usuarios
      $all_users = [];

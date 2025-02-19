@@ -7,7 +7,7 @@
                 const name = $('#search-name').val().trim();
                 const email = $('#search-email').val().trim();
 
-                console.log("Buscando usuarios con:", name, email, "Página:", page); 
+                console.log("Buscando usuarios con:", name, email, "Página:", page);
 
                 $.ajax({
                     url: "/users-list/search/ajax",
@@ -15,9 +15,9 @@
                     contentType: "application/json",
                     data: JSON.stringify({ name, email, page }),
                     success: function (response) {
-                        console.log("Respuesta recibida:", response); 
+                        console.log("Respuesta recibida:", response);
 
-                        if (!response.usuarios.length) {
+                        if (!response.usuarios || response.usuarios.length === 0) {
                             $('#users-container').html('<p>No hay usuarios disponibles.</p>');
                             return;
                         }
@@ -37,7 +37,7 @@
                         $('#pagination-container').html(pagination);
                     },
                     error: function (xhr) {
-                        console.error("Error en la petición AJAX:", xhr);
+                        console.error("❌ Error en la petición AJAX:", xhr);
                         $('#users-container').html('<p>Error al cargar los usuarios.</p>');
                     }
                 });
