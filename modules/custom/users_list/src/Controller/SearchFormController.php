@@ -14,6 +14,7 @@ class SearchFormController extends ControllerBase {
       '#theme' => 'users_list_search', 
       '#attached' => [
         'library' => [
+          'users_list/users_list_styles', 
           'users_list/users_list_js',
         ],
       ],
