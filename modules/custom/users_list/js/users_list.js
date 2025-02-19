@@ -3,7 +3,7 @@
 
     Drupal.behaviors.usersListSearch = {
         attach: function (context, settings) {
-            console.log("users_list.js cargado correctamente con Drupal y jQuery funcionando.");
+            console.log("users_list.js cargado correctamente con paginación AJAX.");
 
             function loadUsers(page = 1) {
                 const name = $('#search-name', context).val()?.trim() || "";
@@ -17,10 +17,11 @@
                     contentType: "application/json",
                     data: JSON.stringify({ name, email, page }),
                     success: function (response) {
-                        console.log("✅ Respuesta AJAX recibida:", response);
+                        console.log("Respuesta AJAX recibida:", response);
 
                         if (!response.usuarios || response.usuarios.length === 0) {
                             $('#users-container', context).html('<p>No hay usuarios disponibles.</p>');
+                            $('#pagination-container', context).html(''); 
                             return;
                         }
 
@@ -32,9 +33,11 @@
 
                         $('#users-container', context).html(userList);
 
+
                         let pagination = '';
                         if (response.total && response.per_page) {
-                            for (let i = 1; i <= Math.ceil(response.total / response.per_page); i++) {
+                            const totalPages = Math.ceil(response.total / response.per_page);
+                            for (let i = 1; i <= totalPages; i++) {
                                 pagination += `<button class="pagination-btn" data-page="${i}">${i}</button> `;
                             }
                         }
@@ -47,17 +50,21 @@
                 });
             }
 
-            $(once('users-list-search', '#users-search-form', context)).submit(function (event) {
+
+            $('#users-search-form', context).once('users-list-search').submit(function (event) {
                 event.preventDefault();
                 console.log("Evento submit ejecutado correctamente.");
-                loadUsers();
+                loadUsers(1); 
                 return false;
             });
 
-            $(once('users-list-pagination', document, context)).on('click', '.pagination-btn', function () {
+
+            $(document, context).once('users-list-pagination').on('click', '.pagination-btn', function () {
                 let page = $(this).data('page');
+                console.log("Cargando página:", page);
                 loadUsers(page);
             });
+
 
             loadUsers();
         }
