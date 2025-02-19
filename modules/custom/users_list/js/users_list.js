@@ -4,8 +4,10 @@
             console.log("users_list.js cargado correctamente.");
 
             function loadUsers(page = 1) {
-                const name = $('#search-name').val();
-                const email = $('#search-email').val();
+                const name = $('#search-name').val().trim();
+                const email = $('#search-email').val().trim();
+
+                console.log("Buscando usuarios con:", name, email, "Página:", page); 
 
                 $.ajax({
                     url: "/users-list/search/ajax",
@@ -13,6 +15,8 @@
                     contentType: "application/json",
                     data: JSON.stringify({ name, email, page }),
                     success: function (response) {
+                        console.log("Respuesta recibida:", response); 
+
                         if (!response.usuarios.length) {
                             $('#users-container').html('<p>No hay usuarios disponibles.</p>');
                             return;
@@ -32,7 +36,8 @@
                         }
                         $('#pagination-container').html(pagination);
                     },
-                    error: function () {
+                    error: function (xhr) {
+                        console.error("Error en la petición AJAX:", xhr);
                         $('#users-container').html('<p>Error al cargar los usuarios.</p>');
                     }
                 });
@@ -48,7 +53,7 @@
                 loadUsers(page);
             });
 
-            loadUsers();
+            loadUsers(); 
         }
     };
 })(jQuery, Drupal);

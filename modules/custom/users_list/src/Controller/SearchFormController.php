@@ -22,8 +22,8 @@ class SearchFormController extends ControllerBase {
 
   public function searchUsers(Request $request) {
     $data = json_decode($request->getContent(), true);
-    $name = $data['name'] ?? '';
-    $email = $data['email'] ?? '';
+    $name = trim($data['name'] ?? '');
+    $email = trim($data['email'] ?? '');
     $page = $data['page'] ?? 1;
     $perPage = 5;
 
