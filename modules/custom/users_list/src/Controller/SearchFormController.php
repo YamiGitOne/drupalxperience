@@ -36,7 +36,7 @@ class SearchFormController extends ControllerBase {
 
      // Simulación de usuarios
      $all_users = [];
-     for ($i = 1; $i <= 20; $i++) {
+     for ($i = 1; $i <= 50; $i++) {
        $all_users[] = [
          'id' => $i,
          'name' => "Usuario $i",
