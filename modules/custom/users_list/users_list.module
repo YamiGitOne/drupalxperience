@@ -9,5 +9,6 @@ function users_list_theme($existing, $type, $theme, $path) {
   ];
 }
 
-
-
+function users_list_preprocess_page(&$variables) {
+  $variables['#attached']['library'][] = 'users_list/ajax';
+}
